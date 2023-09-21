@@ -4,8 +4,13 @@ import paramiko
 from io import StringIO
 
 if __name__ == "__main__":
-  print(sys.argv[2])
-  secret_obj = json.loads(sys.argv[2])
+  secret_obj = {}
+  secret_str = sys.argv[2][1:]
+  secret_str = secret_str[:-1]
+  secret_arr = secret_str.split(",")
+  for section in secret_arr:
+    temp_arr = section.split(":")
+    secret_obj[temp_arr[0]] = temp_arr[1]
   # Builds RSA key to be used in SSH
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----
   {secret_obj.staging1_ssh_key}
