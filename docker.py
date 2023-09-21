@@ -16,10 +16,8 @@ if __name__ == "__main__":
     temp_arr = section.split(":")
     secret_obj[temp_arr[0]] = temp_arr[1]
   raw_key = codecs.decode(secret_obj[key_index][:-2], 'unicode_escape')
-  print(raw_key)
   # Builds RSA key to be used in SSH
   my_key = f"-----BEGIN RSA PRIVATE KEY-----\n{raw_key}\n-----END RSA PRIVATE KEY-----"
-  print(my_key)
   pkey = paramiko.RSAKey.from_private_key(StringIO(my_key))
   def pull(pkey, ip, image, tag):
     conn = Connection(
