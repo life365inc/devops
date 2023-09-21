@@ -2,9 +2,12 @@ import sys
 import json
 import paramiko
 from io import StringIO
+from fabric import Connection
 import codecs
 
 if __name__ == "__main__":
+  key_index = f"{sys.argv[3]}_ssh_key"
+  ip_index = f"{sys.argv[3]}_IP"
   secret_obj = {}
   secret_str = sys.argv[2][1:]
   secret_str = secret_str[:-1]
@@ -12,7 +15,7 @@ if __name__ == "__main__":
   for section in secret_arr:
     temp_arr = section.split(":")
     secret_obj[temp_arr[0]] = temp_arr[1]
-  raw_key = codecs.decode(secret_obj["staging1_ssh_key"][:-2], 'unicode_escape')
+  raw_key = codecs.decode(secret_obj[key_index][:-2], 'unicode_escape')
   print(raw_key)
   # Builds RSA key to be used in SSH
   my_key = f"-----BEGIN RSA PRIVATE KEY-----\n{raw_key}\n-----END RSA PRIVATE KEY-----"
@@ -51,7 +54,7 @@ if __name__ == "__main__":
 
 
   if sys.argv[1] == "pull":
-    pull(pkey, secret_obj["staging1_IP"], sys.argv[4], sys.argv[5])
+    pull(pkey, secret_obj[ip_index], sys.argv[4], sys.argv[5])
   else:
-    deploy(pkey, secret_obj["staging1_IP"], sys.argv[4])
+    deploy(pkey, secret_obj[ip_index], sys.argv[4])
     
