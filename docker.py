@@ -46,8 +46,11 @@ if __name__ == "__main__":
         },
     )
     try:
+        exe_cmd = "~/l365/l365 start"
+        if sys.argv[3] == "staging1":
+          exe_cmd = "docker-compose -f ssl-compose.yml up -d"
         print(f"......deploying {image}......")
-        conn.run(f"~/l365/l365 start")
+        conn.run(exe_cmd)
         conn.close()
     except:
         raise ValueError("Unable to execute")
