@@ -4,6 +4,7 @@ import paramiko
 from io import StringIO
 
 if __name__ == "__main__":
+  print(sys.argv[2])
   secret_obj = json.loads(sys.argv[2])
   # Builds RSA key to be used in SSH
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----
