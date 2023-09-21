@@ -15,8 +15,7 @@ if __name__ == "__main__":
   raw_key = secret_obj["staging1_ssh_key"]
   print(type(raw_key))
   # Builds RSA key to be used in SSH
-  my_key = f"""-----BEGIN RSA PRIVATE KEY-----{raw_key}
------END RSA PRIVATE KEY-----"""
+  my_key = f"-----BEGIN RSA PRIVATE KEY-----\n{raw_key}\n-----END RSA PRIVATE KEY-----"
   print(my_key)
   pkey = paramiko.RSAKey.from_private_key(StringIO(my_key))
   def pull(pkey, ip, image, tag):
