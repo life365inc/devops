@@ -12,7 +12,7 @@ if __name__ == "__main__":
   for section in secret_arr:
     temp_arr = section.split(":")
     secret_obj[temp_arr[0]] = temp_arr[1]
-  raw_key = codecs.decode(secret_obj["staging1_ssh_key"], 'unicode_escape')
+  raw_key = codecs.decode(secret_obj["staging1_ssh_key"][:-2], 'unicode_escape')
   print(raw_key)
   # Builds RSA key to be used in SSH
   my_key = f"-----BEGIN RSA PRIVATE KEY-----\n{raw_key}\n-----END RSA PRIVATE KEY-----"
