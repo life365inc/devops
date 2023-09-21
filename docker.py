@@ -17,8 +17,8 @@ if __name__ == "__main__":
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----
   {str(raw_key)}
   -----END RSA PRIVATE KEY-----"""
+  print(my_key)
   pkey = paramiko.RSAKey.from_private_key(StringIO(my_key))
-  print(pkey)
   def pull(pkey, ip, image, tag):
     conn = Connection(
         host=f'{ip}',
