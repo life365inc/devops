@@ -12,10 +12,10 @@ if __name__ == "__main__":
     temp_arr = section.split(":")
     secret_obj[temp_arr[0]] = temp_arr[1]
   raw_key = secret_obj["staging1_ssh_key"].replace("\n", "")
-  print(raw_key)
+  print(str(raw_key))
   # Builds RSA key to be used in SSH
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----
-  {raw_key}
+  {str(raw_key)}
   -----END RSA PRIVATE KEY-----"""
   pkey = paramiko.RSAKey.from_private_key(StringIO(my_key))
 
