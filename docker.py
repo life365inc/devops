@@ -3,10 +3,10 @@ import paramiko
 from io import StringIO
 
 if __name__ == "__main__":
-  print(sys.argv[3])
+  print(sys.argv[2])
   # Builds RSA key to be used in SSH
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----
-  {sys.argv[3]}
+  {sys.argv[2].staging1_ssh_key}
   -----END RSA PRIVATE KEY-----"""
   pkey = paramiko.RSAKey.from_private_key(StringIO(my_key))
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
 
   if sys.argv[1] == "pull":
-    pull(pkey, sys.argv[2], sys.argv[4], sys.argv[5])
+    pull(pkey, sys.argv[2].staging1_IP, sys.argv[4], sys.argv[5])
   else:
-    deploy(pkey, sys.argv[2], sys.argv[4])
+    deploy(pkey, sys.argv[2].staging1_IP, sys.argv[4])
     
