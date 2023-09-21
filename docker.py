@@ -3,6 +3,7 @@ import paramiko
 from io import StringIO
 
 if __name__ == "__main__":
+  print(sys.argv[3])
   # Builds RSA key to be used in SSH
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----
   {sys.argv[3]}
