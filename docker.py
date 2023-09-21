@@ -12,7 +12,8 @@ if __name__ == "__main__":
   for section in secret_arr:
     temp_arr = section.split(":")
     secret_obj[temp_arr[0]] = temp_arr[1]
-  raw_key = secret_obj["staging1_ssh_key"].replace("\n", linesep).encode("utf-8")
+  raw_key = secret_obj["staging1_ssh_key"]
+  print(type(raw_key))
   # Builds RSA key to be used in SSH
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----{raw_key}
 -----END RSA PRIVATE KEY-----"""
