@@ -2,7 +2,7 @@ import sys
 import json
 import paramiko
 from io import StringIO
-from os import linesep
+import codecs
 
 if __name__ == "__main__":
   secret_obj = {}
@@ -12,8 +12,8 @@ if __name__ == "__main__":
   for section in secret_arr:
     temp_arr = section.split(":")
     secret_obj[temp_arr[0]] = temp_arr[1]
-  raw_key = secret_obj["staging1_ssh_key"]
-  print(type(raw_key))
+  raw_key = codecs.decode(secret_obj["staging1_ssh_key"], 'unicode_escape')
+  print(raw_key)
   # Builds RSA key to be used in SSH
   my_key = f"-----BEGIN RSA PRIVATE KEY-----\n{raw_key}\n-----END RSA PRIVATE KEY-----"
   print(my_key)
