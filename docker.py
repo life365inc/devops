@@ -14,7 +14,7 @@ if __name__ == "__main__":
   print(secret_obj)
   # Builds RSA key to be used in SSH
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----
-  {secret_obj.staging1_ssh_key}
+  {secret_obj['staging1_ssh_key']}
   -----END RSA PRIVATE KEY-----"""
   pkey = paramiko.RSAKey.from_private_key(StringIO(my_key))
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
 
   if sys.argv[1] == "pull":
-    pull(pkey, secret_obj.staging1_IP, sys.argv[4], sys.argv[5])
+    pull(pkey, secret_obj['staging1_ssh_IP'], sys.argv[4], sys.argv[5])
   else:
-    deploy(pkey, secret_obj.staging1_IP, sys.argv[4])
+    deploy(pkey, secret_obj['staging1_ssh_IP'], sys.argv[4])
     
