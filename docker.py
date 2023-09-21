@@ -1,12 +1,13 @@
 import sys
+import json
 import paramiko
 from io import StringIO
 
 if __name__ == "__main__":
-  print(sys.argv[2])
+  secret_obj = json.loads(sys.argv[2])
   # Builds RSA key to be used in SSH
   my_key = f"""-----BEGIN RSA PRIVATE KEY-----
-  {sys.argv[2].staging1_ssh_key}
+  {secret_obj.staging1_ssh_key}
   -----END RSA PRIVATE KEY-----"""
   pkey = paramiko.RSAKey.from_private_key(StringIO(my_key))
 
@@ -43,7 +44,7 @@ if __name__ == "__main__":
 
 
   if sys.argv[1] == "pull":
-    pull(pkey, sys.argv[2].staging1_IP, sys.argv[4], sys.argv[5])
+    pull(pkey, secret_obj.staging1_IP, sys.argv[4], sys.argv[5])
   else:
-    deploy(pkey, sys.argv[2].staging1_IP, sys.argv[4])
+    deploy(pkey, secret_obj.staging1_IP, sys.argv[4])
     
